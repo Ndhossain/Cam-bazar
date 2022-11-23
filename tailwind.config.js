@@ -12,7 +12,8 @@ module.exports = {
       success: '#28a745',
     },
     fontFamily: {
-      sans: ["Crate Helvetica", "Helvetica Neue", 'Helvetica', 'Arial'],
+      sans: ['Crate Helvetica', 'Helvetica Neue', 'Helvetica', 'Arial'],
+      serif: ['Roboto', 'Arial']
     },
   },
   plugins: [require('flowbite/plugin')],
