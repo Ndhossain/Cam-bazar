@@ -14,7 +14,7 @@ const CategoryMenu = () => {
             console.log(err)
         })
     }, [])
-    console.log(categories);
+
     return (
         <ul className='flex sm:flex-row flex-col sm:justify-center sm:gap-2 sm:bg-primary sm:text-white text-sm sm:font-bold'>
             {
