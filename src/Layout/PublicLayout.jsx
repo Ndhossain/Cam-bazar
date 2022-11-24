@@ -6,9 +6,7 @@ const PublicLayout = () => {
     return (
         <>
             <Menubar />
-            <main className='max-w-[1480px] mx-auto px-3'>
-                <Outlet />
-            </main>
+            <Outlet />
         </>
     );
 };

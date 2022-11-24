@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from './Header';
 
 const Home = () => {
     return (
         <div>
-            <h1>This is Home Page</h1>
+            <Header />
+            <main className='max-w-[1480px] mx-auto px-3' />
         </div>
     );
 };

@@ -27,7 +27,7 @@ const Menubar = () => {
                     )}
                 </button>
                 <ul 
-                    className={`flex top-0 sm:flex-row flex-col gap-3 sm:relative fixed sm:translate-x-0 sm:h-min h-screen sm:w-min w-1/2 bg-primary sm:bg-white sm:text-primary text-white duration-300 overflow-y-scroll sm:overflow-y-visible ${responsiveNav ? 'translate-x-[100%]' : 'translate-x-[200%]'}`}
+                    className={`flex top-0 sm:flex-row flex-col gap-3 sm:relative fixed sm:translate-x-0 sm:h-min h-screen sm:w-min w-1/2 bg-primary sm:bg-white sm:text-primary text-white duration-300 overflow-y-scroll sm:overflow-y-visible z-40 ${responsiveNav ? 'translate-x-[100%]' : 'translate-x-[200%]'}`}
                 >
                     <li className='flex items-center mt-14 sm:mt-0'>
                         <Link className='px-2 sm:p-2' to='/'>
