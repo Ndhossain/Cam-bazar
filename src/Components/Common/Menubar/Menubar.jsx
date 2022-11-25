@@ -8,7 +8,6 @@ import CategoryMenu from './CategoryMenu';
 const Menubar = () => {
     const [responsiveNav, setResponsiveNav] = useState(false);
     const {currentUser, logoutUser, loading} = useAuth();
-    console.log(loading);
 
     return (
         <div>

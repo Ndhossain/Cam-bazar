@@ -2,7 +2,6 @@ import React from 'react';
 import BannerImg from '../../../../assets/images/Banner.jpg'
 
 const Header = () => {
-    console.log(BannerImg)
     return (
         <div className='relative'>
             <div className='bg-black'>

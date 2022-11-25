@@ -32,8 +32,6 @@ const useUserRole = (uid) => {
         }
     }, [logoutUser, uid]);
 
-    console.log(isAdmin, isSeller);
-
     return { isAdmin, isLoading, isSeller }
 };
 

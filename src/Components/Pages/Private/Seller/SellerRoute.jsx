@@ -8,8 +8,6 @@ const SellerRoute = ({children}) => {
     const {currentUser} = useAuth();
     const {isLoading, isAdmin, isSeller} = useUserRole(currentUser?.uid);
 
-    console.log(isLoading);
-
     if (isLoading) {
         return (
             <div className='h-screen w-screen flex justify-center items-center'>
@@ -24,9 +22,7 @@ const SellerRoute = ({children}) => {
         );
     }
 
-
     if (isAdmin || isSeller) {
-        console.log('object');
         return children;
     }
     

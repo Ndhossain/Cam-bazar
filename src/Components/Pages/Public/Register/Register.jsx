@@ -16,9 +16,9 @@ const Register = () => {
     const [error, setError] = useState('');
     const [currentUserUid, setCurrentUserUid] = useState('');
     const {register, handleSubmit,  formState: { errors }} = useForm();
-    const {registerUser, loading} = useAuth();
-    const token = useToken(currentUserUid);
+    const {registerUser, loading, setLoading} = useAuth();
     const navigate = useNavigate();
+    const token = useToken(currentUserUid);
     
     useEffect(() => {
         if (token) {
@@ -27,21 +27,21 @@ const Register = () => {
         }
     }, [navigate, token])
 
-    console.log(userImage)
 
     const onsubmit = async (data) => {
         if (!userImage) {
             return setImageError('Can not keep this field empty')
         };
         try {
+            setError('');
             const formdata = new FormData();
             formdata.append('image', userImage[0]);
             const res = await fetch(process.env.REACT_APP_IMAGE_HOSTING_API, {
-                method: 'POST',
-                body: formdata,
-            }
-        );
-        const imgbbData = await res.json();
+                    method: 'POST',
+                    body: formdata,
+                }
+            );
+            const imgbbData = await res.json();
             const userRegisterRes = await registerUser(data.email, data.password, data.name, imgbbData.data.display_url);
             await axios({
                 method: 'POST',
@@ -56,7 +56,13 @@ const Register = () => {
             });
             setCurrentUserUid(userRegisterRes.user.uid);
         } catch (err) {
-            setError(err.message);
+            if (err.message.includes('auth/email-already-in-use')) {
+                setError('Email already in use.')
+            } else {
+               setError('Something went wrong!')
+            }
+            toast.error('Something went wrong!');
+            setLoading(false);
         }
     }
     return (
@@ -154,7 +160,7 @@ const Register = () => {
                 <div>
                     <button
                         type="submit" 
-                        className="text-primary border border-primary hover:bg-primary hover:text-white focus:outline-none font-medium text-sm w-full px-5 py-2.5 text-center"
+                        className="text-primary border border-primary hover:bg-primary hover:text-white focus:outline-none font-bold text-sm w-full px-5 py-2.5 text-center"
                         disabled={loading}
                     >
                         {
@@ -176,7 +182,7 @@ const Register = () => {
                         Or
                     </span>
                 </div>
-                <SocialLogin />
+                <SocialLogin setError={setError} />
             </form>
         </main>
     );
