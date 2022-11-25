@@ -1,9 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import DashboardMenu from '../Components/Common/DashboardMenu/DashboardMenu';
 
 const DashboardLayout = () => {
     return (
-        <div>
+        <div className='flex'>
+            <DashboardMenu />
             <Outlet />
         </div>
     );

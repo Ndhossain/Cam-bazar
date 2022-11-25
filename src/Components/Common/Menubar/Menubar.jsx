@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaUserPlus, FaHeart, FaCartPlus } from 'react-icons/fa';
+import React, { useState } from 'react';
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
-import { useState } from 'react';
+import { FaCartPlus, FaHeart, FaUserAlt, FaUserPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 import CategoryMenu from './CategoryMenu';
 
 const Menubar = () => {
     const [responsiveNav, setResponsiveNav] = useState(false);
+    const {currentUser, logout, loading} = useAuth();
+    console.log(loading);
 
     return (
         <div>
@@ -44,16 +46,55 @@ const Menubar = () => {
                         <span className='sm:block hidden'>0</span>
                     </li>
                     <li className='flex items-center relative group'>
-                        <Link className='p-2 hidden sm:block' to='/login'>
-                            <FaUserPlus size={22} color={responsiveNav ? '#fff' : '#222'} />
-                        </Link>
-                        <ul className='sm:p-2 sm:absolute sm:top-9 sm:right-0 sm:w-40 sm:bg-white sm:border sm:border-primary sm:hidden sm:group-hover:block'>
-                            <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
-                                <Link className='block' to='/register'>Register</Link>
-                            </li>
-                            <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
-                                <Link className='block' to='/login'>Login</Link>
-                            </li>
+                        {
+                            !loading && (currentUser ? (
+                                // <img className='rounded-full' src={currentUser.photoURL} alt={currentUser.displayName} />
+                                <FaUserAlt size={20} color={responsiveNav ? '#fff' : '#222'} />
+                            ) : (
+                                <Link className='p-2 hidden sm:block' to='/login'>
+                                    <FaUserPlus size={22} color={responsiveNav ? '#fff' : '#222'} />
+                                </Link>
+                            ))
+                        }
+                        <ul className='sm:p-2 sm:absolute sm:top-9 sm:right-[-10px] sm:w-60 sm:bg-white sm:border sm:border-primary sm:hidden sm:group-hover:block'>
+                            {
+                                currentUser ? (
+                                    <>
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
+                                            <div>
+                                                {currentUser?.displayName}
+                                            </div>
+                                            <div>
+                                                {currentUser?.email}
+                                            </div>
+                                        </li>
+
+                                        <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0' />
+
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10 '>
+                                            <Link to='/dashboard'>Dashboard</Link>
+                                        </li>
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
+                                            <Link>Become an admin</Link>
+                                        </li>
+
+                                        <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0' />
+
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
+                                            <button onClick={() => logout()} type='button block'>Logout</button>
+                                        </li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10 border-b border-primary'>
+                                            <Link className='block' to='/register'>Register</Link>
+                                        </li>
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
+                                            <Link className='block' to='/login'>Login</Link>
+                                        </li>
+                                    </>
+                                )
+                            }
                         </ul>
                     </li>
                     <li>

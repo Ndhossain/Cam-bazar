@@ -7,7 +7,8 @@ import useToken from '../../../../Hooks/useToken';
 import SocialLogin from '../../../Common/SocialLogin/SocialLogin';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import PulseLoader from "react-spinners/PulseLoader";
 
 const Register = () => {
     const [userImage, setUserImage] = useState(null);
@@ -15,7 +16,7 @@ const Register = () => {
     const [error, setError] = useState('');
     const [currentUserUid, setCurrentUserUid] = useState('');
     const {register, handleSubmit,  formState: { errors }} = useForm();
-    const {registerUser} = useAuth();
+    const {registerUser, loading} = useAuth();
     const token = useToken(currentUserUid);
     const navigate = useNavigate();
     
@@ -26,6 +27,8 @@ const Register = () => {
         }
     }, [navigate, token])
 
+    console.log(userImage)
+
     const onsubmit = async (data) => {
         if (!userImage) {
             return setImageError('Can not keep this field empty')
@@ -33,12 +36,13 @@ const Register = () => {
         try {
             const formdata = new FormData();
             formdata.append('image', userImage[0]);
-            const res = await axios({
+            const res = await fetch(process.env.REACT_APP_IMAGE_HOSTING_API, {
                 method: 'POST',
-                url: process.env.REACT_APP_IMAGE_HOSTING_API,
-                data: formdata,
-            });
-            const userRegisterRes = await registerUser(data.email, data.password, data.name, res.data.data.display_url);
+                body: formdata,
+            }
+        );
+        const imgbbData = await res.json();
+            const userRegisterRes = await registerUser(data.email, data.password, data.name, imgbbData.data.display_url);
             await axios({
                 method: 'POST',
                 data: {
@@ -117,14 +121,13 @@ const Register = () => {
                 </div>
                 <div className='mb-6'>
                     {
-                        userImage && <img className='h-[200px] w-[200px] mx-auto' src={userImage[0].preview} alt="user" />
+                        userImage && <img className='h-[200px] w-[200px] mx-auto' src={userImage[0]?.preview} alt="user" />
                     }
                 </div>
                 <Dropzone
                     maxFiles={1}
                     accept={{'image/jpeg': ['.jpeg', '.png']}} 
                     onDrop={acceptedFiles => {
-                        console.log(acceptedFiles[0]);
                         setUserImage(acceptedFiles.map(file => Object.assign(file, {
                             preview: URL.createObjectURL(file)
                           })))
@@ -149,7 +152,23 @@ const Register = () => {
                 {imageError && <p className='text-danger text-sm mb-6' role="alert">{imageError}</p>}
                 <p className='text-sm mb-5'>Already have an account? <Link className='underline' to='/login'>Login</Link> now.</p>
                 <div>
-                    <button type="submit" className="text-primary border border-primary hover:bg-primary hover:text-white focus:outline-none font-medium text-sm w-full px-5 py-2.5 text-center">REGISTER</button>
+                    <button
+                        type="submit" 
+                        className="text-primary border border-primary hover:bg-primary hover:text-white focus:outline-none font-medium text-sm w-full px-5 py-2.5 text-center"
+                        disabled={loading}
+                    >
+                        {
+                            loading ? 
+                                <PulseLoader 
+                                    color="#222" 
+                                    loading={loading} 
+                                    size={16} 
+                                    aria-label="Loading Spinner" 
+                                    data-testid="loader" 
+                                /> : 
+                                'REGISTER'
+                        }
+                    </button>
                 </div>
                 <div className="inline-flex justify-center items-center w-full">
                     <hr className="my-8 h-px bg-primary border-0 w-full" />
