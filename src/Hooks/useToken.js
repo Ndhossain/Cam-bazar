@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 
 const useToken = (uid) => {
     const [token, setToken] = useState('');
-    const { logout } = useAuth();
+    const { logoutUser } = useAuth();
     useEffect(() => {
         if (uid) {
             axios({
@@ -20,12 +20,12 @@ const useToken = (uid) => {
                 }
             }).catch(err => {
                 if (err.response.status === 403) {
-                    logout();
+                    logoutUser();
                     toast.error('Something went wrong!')
                 }
             })
         }
-    }, [logout, uid])
+    }, [logoutUser, uid])
     return token;
 }
 

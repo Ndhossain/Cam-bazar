@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
-import { FaCartPlus, FaHeart, FaUserAlt, FaUserPlus } from 'react-icons/fa';
+import { FaCartPlus, FaHeart, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import CategoryMenu from './CategoryMenu';
 
 const Menubar = () => {
     const [responsiveNav, setResponsiveNav] = useState(false);
-    const {currentUser, logout, loading} = useAuth();
+    const {currentUser, logoutUser, loading} = useAuth();
     console.log(loading);
 
     return (
@@ -45,11 +45,11 @@ const Menubar = () => {
                         </Link>
                         <span className='sm:block hidden'>0</span>
                     </li>
-                    <li className='flex items-center relative group'>
+                    <li className='flex items-center relative group w-10'>
                         {
                             !loading && (currentUser ? (
-                                // <img className='rounded-full' src={currentUser.photoURL} alt={currentUser.displayName} />
-                                <FaUserAlt size={20} color={responsiveNav ? '#fff' : '#222'} />
+                                <img className='rounded-full h-10 w-10' src={currentUser.photoURL} alt={currentUser.displayName} />
+                                // <FaUserAlt size={20} color={responsiveNav ? '#fff' : '#222'} />
                             ) : (
                                 <Link className='p-2 hidden sm:block' to='/login'>
                                     <FaUserPlus size={22} color={responsiveNav ? '#fff' : '#222'} />
@@ -71,26 +71,26 @@ const Menubar = () => {
 
                                         <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0' />
 
-                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10 '>
-                                            <Link to='/dashboard'>Dashboard</Link>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full'>
+                                            <Link className='px-2 block sm:p-2' to='/dashboard'>Dashboard</Link>
                                         </li>
-                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
-                                            <Link>Become an admin</Link>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full'>
+                                            <Link className='px-2 block sm:p-2'>Become an admin</Link>
                                         </li>
 
                                         <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0' />
 
-                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
-                                            <button onClick={() => logout()} type='button block'>Logout</button>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full'>
+                                            <button className='px-2 block sm:p-2' onClick={() => logoutUser()} type='button block'>Logout</button>
                                         </li>
                                     </>
                                 ) : (
                                     <>
-                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10 border-b border-primary'>
-                                            <Link className='block' to='/register'>Register</Link>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 border-b border-primary'>
+                                            <Link className='block sm:p-2 px-2' to='/register'>Register</Link>
                                         </li>
-                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
-                                            <Link className='block' to='/login'>Login</Link>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10'>
+                                            <Link className='block sm:p-2 px-2' to='/login'>Login</Link>
                                         </li>
                                     </>
                                 )

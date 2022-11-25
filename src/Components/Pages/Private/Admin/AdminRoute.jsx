@@ -1,17 +1,19 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
-import useAuth from '../../../Hooks/useAuth';
+import useAuth from '../../../../Hooks/useAuth';
+import useUserRole from '../../../../Hooks/useUserRole';
 
-const PrivateRoute = ({children}) => {
-    const {currentUser, loading} = useAuth();
+const AdminRoute = ({children}) => {
+    const {currentUser} = useAuth();
+    const {isLoading, isAdmin} = useUserRole(currentUser.uid);
 
-    if (loading) {
+    if (isLoading) {
         return (
             <div className='h-screen w-screen flex justify-center items-center'>
                 <PulseLoader 
                     color="#222" 
-                    loading={loading} 
+                    loading={isLoading} 
                     size={16} 
                     aria-label="Loading Spinner" 
                     data-testid="loader" 
@@ -20,11 +22,11 @@ const PrivateRoute = ({children}) => {
         );
     }
 
-    if (!currentUser) {
+    if (!isAdmin) {
         return <Navigate to='/login' />;
     }
 
     return children;
 };
 
-export default PrivateRoute;
+export default AdminRoute;
