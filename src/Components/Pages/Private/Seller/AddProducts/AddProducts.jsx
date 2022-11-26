@@ -3,6 +3,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useAuth from '../../../../../Hooks/useAuth';
 
@@ -10,7 +12,8 @@ const AddProducts = () => {
     const [productImage, setProductImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const {handleSubmit, register} = useForm();
-    const { currentUser } = useAuth();
+    const { currentUser, logoutUser } = useAuth();
+    const navigate = useNavigate();
     const {data: categories, isLoading} = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
@@ -27,6 +30,9 @@ const AddProducts = () => {
     })
 
     const onsubmit = async (data) => {
+        if (!productImage) {
+            return toast.error('Add atleast one image for your product')
+        };
         try {
             setLoading(true);
             const imageRes = await axios.all(productImage.map(image => {
@@ -39,11 +45,32 @@ const AddProducts = () => {
                 });
             }))
             data.sellerName = currentUser.displayName;
+            data.category = data.category || 'DSLR Camera';
             data.sellerEmail = currentUser.email;
             data.uid = currentUser.uid;
             data.productImage = imageRes?.map(res => res.data.data.display_url);
+            data.status = 'unsold';
+            data.advertise = false;
+            await axios({
+                method: 'POST',
+                data,
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
+                },
+                url: `${process.env.REACT_APP_DEV_SERVER_URL}/products?uid=${currentUser.uid}`
+            })
+            toast.success('Successfully addeded');
+            navigate('/dashboard/myproducts')
+            setLoading(false);
         } catch (err) {
-            console.log(err);
+            console.log(err)
+            if (err.response.status === 403 || err.response.status === 401) {
+                logoutUser();
+                toast.error(err.response.data.message);
+            } else {
+                toast.error('Something Went Wrong')
+            }
+            setLoading(false);
         }
     }
 
@@ -151,6 +178,7 @@ const AddProducts = () => {
                         <select 
                             id="condition" 
                             className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                            required
                             {...register('condition')}
                         >
                             <option value="Excellent">Excellent</option>
@@ -164,6 +192,7 @@ const AddProducts = () => {
                         <select 
                             id="category" 
                             className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                            required
                             {...register('category')}
                         >
                             {
@@ -177,6 +206,7 @@ const AddProducts = () => {
                         rows="4" 
                         className="block p-2.5 w-full text-sm text-primary border border-gray-300 focus:ring-primary focus:border-primary resize-none" 
                         placeholder="Product Description..."
+                        required
                         {...register('description')}
                     />
                 </div>

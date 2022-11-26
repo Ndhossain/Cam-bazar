@@ -21,7 +21,7 @@ const useToken = (uid) => {
             }).catch(err => {
                 if (err.response.status === 403) {
                     logoutUser();
-                    toast.error('Something went wrong!')
+                    toast.error(err.response.data.message)
                 }
             })
         }

@@ -25,9 +25,9 @@ const useUserRole = (uid) => {
             }).catch((err) => {
                 if (err.response.status === 403 || err.response.status === 401) {
                     logoutUser();
-                    toast.error('Something went wrong!');
-                    setIsLoading(false);
+                    toast.error(err.response.data.message);
                 }
+                setIsLoading(false);
             })
         }
     }, [logoutUser, uid]);
