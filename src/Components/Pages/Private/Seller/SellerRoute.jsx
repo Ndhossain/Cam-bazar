@@ -12,7 +12,7 @@ const SellerRoute = ({children}) => {
         return (
             <div className='h-screen w-screen flex justify-center items-center'>
                 <PulseLoader 
-                    color="#222" 
+                    color="#FF3D3D" 
                     loading={isLoading} 
                     size={16} 
                     aria-label="Loading Spinner" 

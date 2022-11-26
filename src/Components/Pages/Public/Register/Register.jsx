@@ -160,13 +160,13 @@ const Register = () => {
                 <div>
                     <button
                         type="submit" 
-                        className="text-primary border border-primary hover:bg-primary hover:text-white focus:outline-none font-bold text-sm w-full px-5 py-2.5 text-center"
+                        className="hover:text-primary border border-primary bg-primary hover:bg-white  text-white focus:outline-none font-bold text-sm w-full px-5 py-2.5 text-center"
                         disabled={loading}
                     >
                         {
                             loading ? 
                                 <PulseLoader 
-                                    color="#222" 
+                                    color="#FF3D3D" 
                                     loading={loading} 
                                     size={16} 
                                     aria-label="Loading Spinner" 
