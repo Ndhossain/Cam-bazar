@@ -12,7 +12,7 @@ const MyProducts = () => {
     const [deleteId, setDeleteId] = useState('');
     const {logoutUser, currentUser} = useAuth();
     const {data: myProducts, isLoading, refetch} = useQuery({
-        queryKey: [],
+        queryKey: ['products', currentUser.uid],
         queryFn: async () => {
             try {
                 const res = await axios({

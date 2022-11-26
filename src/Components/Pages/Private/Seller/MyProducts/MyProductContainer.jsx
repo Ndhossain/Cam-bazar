@@ -29,7 +29,11 @@ const MyProductContainer = ({product, setModalStatus, setDeleteId}) => {
                 {sellingPrice} BDT
             </td>
             <td className="py-4 px-6">
-                {!advertise ? (<button className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'>Ad My Product</button>) : ('Advertising')}
+                {
+                    !advertise ? (
+                        <button className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'>Ad My Product</button>
+                    ) : ('Advertising')
+                }
             </td>
             <td className="py-4 px-6">
                 <Link to={`/dashboard/editproduct/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>

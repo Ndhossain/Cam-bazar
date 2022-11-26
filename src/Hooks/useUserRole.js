@@ -17,7 +17,7 @@ const useUserRole = (uid) => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/users?uid=${uid}`
+                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user/role/${uid}`
             }).then((res) => {
                 setIsAdmin(res.data.isAdmin);
                 setIsSeller(res.data.isSeller);
