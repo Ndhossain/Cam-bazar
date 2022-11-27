@@ -50,7 +50,7 @@ const AddProducts = () => {
             data.uid = currentUser.uid;
             data.productImage = imageRes?.map(res => res.data.data.display_url);
             data.status = 'unsold';
-            data.advertise = false;
+            data.advertise = 'false';
             await axios({
                 method: 'POST',
                 data,

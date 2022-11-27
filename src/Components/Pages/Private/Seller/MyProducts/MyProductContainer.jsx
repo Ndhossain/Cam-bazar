@@ -30,14 +30,14 @@ const MyProductContainer = ({product, setModalStatus, setDeleteId, produtctAdver
             </td>
             <td className="py-4 px-6">
                 {
-                    !advertise ? (
+                    advertise ==='false' ? (
                         <button
-                            onClick={() => produtctAdvertisement(_id, { advertise: true })}
+                            onClick={() => produtctAdvertisement(_id, { advertise: 'true' })}
                             className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'
                         >Ad My Product</button>
                     ) : (
                         <button
-                            onClick={() => produtctAdvertisement(_id, { advertise: false })}
+                            onClick={() => produtctAdvertisement(_id, { advertise: 'false' })}
                             className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'
                         >Don't Ad</button>
                     )

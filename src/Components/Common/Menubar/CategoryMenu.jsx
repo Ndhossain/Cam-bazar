@@ -20,7 +20,7 @@ const CategoryMenu = () => {
             {
                 categories?.map(category => 
                     <li key={category._id} className='p-2'>
-                        <Link to={`/shop/${category._id}`}>{category.name}</Link>
+                        <Link className='hover:text-secondary' to={`/shop/${category._id}`}>{category.name}</Link>
                     </li>
                 )
             }
