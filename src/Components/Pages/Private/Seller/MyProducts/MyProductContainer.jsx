@@ -2,7 +2,7 @@ import React from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
-const MyProductContainer = ({product, setModalStatus, setDeleteId}) => {
+const MyProductContainer = ({product, setModalStatus, setDeleteId, produtctAdvertisement}) => {
     const {status, category, productImage, productName, sellingPrice, _id, advertise } = product;
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -31,8 +31,16 @@ const MyProductContainer = ({product, setModalStatus, setDeleteId}) => {
             <td className="py-4 px-6">
                 {
                     !advertise ? (
-                        <button className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'>Ad My Product</button>
-                    ) : ('Advertising')
+                        <button
+                            onClick={() => produtctAdvertisement(_id, { advertise: true })}
+                            className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'
+                        >Ad My Product</button>
+                    ) : (
+                        <button
+                            onClick={() => produtctAdvertisement(_id, { advertise: false })}
+                            className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'
+                        >Don't Ad</button>
+                    )
                 }
             </td>
             <td className="py-4 px-6">

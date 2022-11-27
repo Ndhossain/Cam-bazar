@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeleteConfirmationBox = ({modalStatus, setModalStatus, handleDelete, setDeleteId}) => {
+const DeleteConfirmationBox = ({modalStatus, setModalStatus, handleDelete, setDeleteId, text}) => {
     return (
         <div id="popup-modal" tabIndex="-1" className={`${modalStatus ? 'flex' : 'hidden'} overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 p-4 md:inset-0 h-modal md:h-full justify-center items-center bg-primary/50`}>
             <div className="relative w-full max-w-md h-full md:h-auto">
@@ -19,7 +19,7 @@ const DeleteConfirmationBox = ({modalStatus, setModalStatus, handleDelete, setDe
                     </button>
                     <div className="p-6 text-center">
                         <svg aria-hidden="true" className="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
+                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this {text}?</h3>
                         <button 
                             data-modal-toggle="popup-modal" 
                             type="button" 

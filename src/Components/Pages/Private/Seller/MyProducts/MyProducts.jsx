@@ -58,6 +58,29 @@ const MyProducts = () => {
         }
     }
 
+    const produtctAdvertisement = async (id, data) => {
+        try {
+            await axios({
+                method: 'PUT',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
+                },
+                data: data,
+                url: `${process.env.REACT_APP_DEV_SERVER_URL}/products/${id}?uid=${currentUser.uid}`
+            })
+            refetch();
+            toast.success(data.advertise ? 'Advertising your product' : 'Removed From advertisement');
+        } catch (err) {
+            console.log(err)
+            if (err.response.status === 403 || err.response.status === 401) {
+                logoutUser();
+                toast.error(err.response.data.message);
+            } else {
+                toast.error('Something Went Wrong')
+            }
+        }
+    }
+
     return (
         <main className='w-full'>
             <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -105,7 +128,8 @@ const MyProducts = () => {
                                             key={product._id} 
                                             product={product} 
                                             setModalStatus={setModalStatus} 
-                                            setDeleteId={setDeleteId} 
+                                            setDeleteId={setDeleteId}
+                                            produtctAdvertisement={produtctAdvertisement}
                                         />)
                                 }
                             </tbody>
@@ -117,7 +141,8 @@ const MyProducts = () => {
                 modalStatus={modalStatus} 
                 handleDelete={handleDelete}
                 setModalStatus={setModalStatus} 
-                setDeleteId={setDeleteId} 
+                setDeleteId={setDeleteId}
+                text='product'
             />
         </main>
     );
