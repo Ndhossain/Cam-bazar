@@ -28,6 +28,7 @@ const Login = () => {
             const res = await loginUser(data.email, data.password)
             setCurrentUserUid(res.user.uid);
         } catch (err) {
+            console.log(err);
             if (err.message.includes('wrong-password')) {
                 setError('Email adress or password is not matching.');
             } else {

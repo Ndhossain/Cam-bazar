@@ -3,6 +3,7 @@ import AdminRoute from "../Components/Pages/Private/Admin/AdminRoute";
 import Buyers from "../Components/Pages/Private/Admin/Buyers/Buyers";
 import Sellers from "../Components/Pages/Private/Admin/Sellers/Sellers";
 import MyBookings from "../Components/Pages/Private/Buyer/MyBookings";
+import Shop from "../Components/Pages/Private/Buyer/Shop/Shop";
 import Myprofile from "../Components/Pages/Private/MyProfile/Myprofile";
 import PrivateRoute from "../Components/Pages/Private/PrivateRoute";
 import AddProducts from "../Components/Pages/Private/Seller/AddProducts/AddProducts";
@@ -12,7 +13,6 @@ import SellerRoute from "../Components/Pages/Private/Seller/SellerRoute";
 import Home from "../Components/Pages/Public/Home/Home";
 import Login from "../Components/Pages/Public/Login/Login";
 import Register from "../Components/Pages/Public/Register/Register";
-import Shop from "../Components/Pages/Public/Shop/Shop";
 import DashboardLayout from "../Layout/DashboardLayout";
 import PublicLayout from "../Layout/PublicLayout";
 
@@ -26,8 +26,12 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: '/shop',
-                element: <Shop />,
+                path: '/shop/:id',
+                element: (
+                    <PrivateRoute>
+                        <Shop />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: '/login',

@@ -30,7 +30,6 @@ const AdvertiseItems = () => {
         }
     })
 
-    console.log(advertisedProducts);
     if(isLoading) {
         return <></>
     }
@@ -39,7 +38,7 @@ const AdvertiseItems = () => {
         return (
             <div className='mt-10'>
                 <h2 className='text-center text-primary font-bold text-2xl mb-10'>Advertised Items</h2>
-                <div className='flex gap-5'>
+                <div className='flex flex-col gap-5'>
                     {
                         advertisedProducts?.data?.map(product => <ProductContainer key={product._id} product={product}/>)
                     }

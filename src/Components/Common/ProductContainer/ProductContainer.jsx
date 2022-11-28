@@ -1,44 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BsCartPlus } from 'react-icons/bs';
-import { GiHeartPlus } from 'react-icons/gi';
-import { FaPlus } from 'react-icons/fa';
 
 const ProductContainer = ({ product }) => {
-    const { productImage, productName, _id, usage, sellingPrice } = product;
+    const { productImage, productName, _id, usage, sellingPrice, sellerName, sellerAdress, newPrice, date } = product;
+
+    // date
+    const day = new Date(date).getDate();
+    const month = new Date(date).getMonth();
+    const year = new Date(date).getFullYear();
+    const time = new Date(date).getHours();
+    const minute = new Date(date).getMinutes();
+    // date
+
     return (
-        <div class="w-full max-w-sm bg-white rounded-lg shadow-lg hover:shadow-2xl dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">
-            <div class="px-5 pb-5 flex flex-col h-max">
-                <div>
-                    <img class="p-3 rounded-t-lg" src={productImage[0]} alt={productName} />
-                </div>
-                <Link className='hover:text-secondary' to={`product/${_id}`}>
-                    <h5 class="text-xl font-semibold tracking-tight">{productName}</h5>
+        <div className="flex flex-col items-center bg-white border rounded-lg shadow-md sm:flex-row w-full">
+            <img className="object-cover h-full w-[200px] p-2 rounded-t-lg md:rounded-none md:rounded-l-lg" src={productImage} alt={productName} />
+            <div className="flex flex-col justify-between p-4 leading-normal">
+                <Link className='hover:text-secondary' to={`/product/${_id}`}>
+                    <h5 className="text-xl font-semibold tracking-tight">{productName}</h5>
                 </Link>
-            </div>
-            <div className='p-5'>
-                <div class="text-lg font-bold">
-                    Usage: {usage} Year
-                </div>
-                <div className='mb-5 text-secondary'>
-                    <span class="font-bold text-xl">{sellingPrice} BDT</span>
-                </div>
-                <div className='mb-4'>
-                    <Link className='hover:underline font-bold hover:text-secondary'>View Details</Link>
-                </div>
-                <div className='flex justify-between'>
-                        <button class="hover:text-secondary text-primary border-2 border-primary bg-white focus:outline-none font-bold text-sm p-2 text-center">
-                            <FaPlus size={30} strokeWidth={.5} />
-                        </button>
-                    <div className='flex gap-5'>
-                        <button class="hover:text-secondary text-primary border-2 border-primary bg-white focus:outline-none font-bold text-sm p-2 text-center">
-                            <BsCartPlus size={30} strokeWidth={.5} />
-                        </button>
-                        <button class="hover:text-secondary text-primary border-2 border-primary bg-white focus:outline-none font-bold text-sm p-2 text-center">
-                            <GiHeartPlus size={30} strokeWidth={.5} />
-                        </button>
-                    </div>
-                </div>
+                <div className="text-sm font-bold">
+                     Usage: {usage} Year
+                 </div>
+                 <div className="text-sm font-bold">
+                     Seller: {sellerName}
+                 </div>
+                 <div className="text-sm font-bold">
+                     Buying Price: {newPrice} BDT
+                 </div>
+                 <div className="text-sm font-bold">
+                     Location: {sellerAdress}
+                 </div>
+                 <div className="text-sm font-bold">
+                     Published On: {`${day}-${month}-${year} at ${time}:${minute < 10 ? `0${minute}`: minute}`}
+                 </div>
+                 <div className='mb-5 text-secondary'>
+                     <span className="font-bold text-xl">{sellingPrice} BDT</span>
+                 </div>
+                 <div className='mb-4'>
+                     <Link to={`/product/${_id}`} className='hover:underline font-bold hover:text-secondary'>View Details</Link>
+                 </div>
             </div>
         </div>
     );

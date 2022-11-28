@@ -51,6 +51,8 @@ const AddProducts = () => {
             data.productImage = imageRes?.map(res => res.data.data.display_url);
             data.status = 'unsold';
             data.advertise = 'false';
+            const { _id } = categories.data?.find((category) => category.name === data.category)
+            data.categoryId = _id;
             await axios({
                 method: 'POST',
                 data,
