@@ -82,6 +82,7 @@ const ProductDetails = () => {
         }
     })
 
+    console.log(productInfo)
 
     if (isLoading || isBookingLoading || isWishlistLoading) {
         return (
@@ -99,7 +100,7 @@ const ProductDetails = () => {
 
     if(!productInfo || !isBooked || !isWishListed) return<></>;
 
-    const { productImage, productName, _id, usage, sellingPrice, sellerName, sellerAdress, newPrice, date, productModel, productBrand, phoneNo, description, condition, uid } = productInfo?.data;
+    const { productImage, productName, _id, usage, sellingPrice, sellerName, sellerAdress, newPrice, date, productModel, productBrand, phoneNo, description, condition, uid, sellerEmail } = productInfo?.data;
     const images = productImage?.map(img => {
         return { original: img, thumbnail: img }
     })
@@ -235,6 +236,7 @@ const ProductDetails = () => {
                     <p className='text-base'>Model: {productModel}</p>
                     <p className='text-base'>Seller Name: {sellerName}</p>
                     <p className='text-base'>Seller Adress: {sellerAdress}</p>
+                    <p className='text-base'>Seller Email: {sellerEmail}</p>
                     <p className='text-base'>Condition: {condition}</p>
                     <p className='text-base'>Seller Phone No: {phoneNo}</p>
                     <p className='text-base'>Published On: {`${day}-${month}-${year} at ${time}:${minute < 10 ? `0${minute}`: minute}`}</p>

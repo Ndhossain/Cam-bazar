@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
-import { FaCartPlus, FaHeart, FaUserPlus } from 'react-icons/fa';
+import { FaBlogger, FaHeart, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import CategoryMenu from './CategoryMenu';
@@ -10,7 +10,7 @@ const Menubar = () => {
     const {currentUser, logoutUser, loading} = useAuth();
 
     return (
-        <div>
+        <div className='sticky top-0 z-30 bg-white'>
             <nav className='flex justify-between items-center px-3 py-3 max-w-[1480px] mx-auto'>
                 <h1 className='text-3xl text-primary font-black'>
                     <Link to='/'>
@@ -28,27 +28,24 @@ const Menubar = () => {
                     )}
                 </button>
                 <ul 
-                    className={`flex top-0 sm:flex-row flex-col gap-3 sm:relative fixed sm:translate-x-0 sm:h-min h-screen sm:w-min w-1/2 bg-primary sm:bg-white sm:text-primary text-white duration-300 overflow-y-scroll sm:overflow-y-visible z-40 ${responsiveNav ? 'translate-x-[100%]' : 'translate-x-[200%]'}`}
+                    className={`flex top-0 sm:flex-row flex-col gap-3 sm:relative fixed sm:translate-x-0 sm:h-min h-screen sm:w-min w-full bg-primary sm:bg-white sm:text-primary text-white duration-300 overflow-y-scroll sm:overflow-y-visible z-40 ${responsiveNav ? 'translate-x-[00%]' : 'translate-x-[200%]'}`}
                 >
                     <li className='flex items-center mt-14 sm:mt-0'>
-                        <Link className='px-2 sm:p-2' to='/'>
-                            <FaHeart className='sm:block hidden' size={22} color={responsiveNav ? '#fff' : '#222'} />
-                            <span className='sm:hidden block text-sm'>Wishlist</span>
+                        <Link className='px-2 sm:p-2 flex items-center gap-2 hover:text-secondary' to='/'>
+                            <FaHeart className='sm:block hidden' size={18} />
+                            <span className='text-sm font-bold'>Wishlist</span>
                         </Link>
-                        <span className='sm:block hidden'>0</span>
                     </li>
-                    <li className='flex items-center'>
-                        <Link className='px-2 sm:p-2' to='/'>
-                            <FaCartPlus className='sm:block hidden' size={22} color={responsiveNav ? '#fff' : '#222'} />
-                            <span className='sm:hidden block text-sm'>Cart</span>
+                    <li className='flex items-center mt-14 sm:mt-0'>
+                        <Link className='px-2 sm:p-2 flex items-center gap-2 hover:text-secondary' to='/'>
+                            <FaBlogger className='sm:block hidden' size={18} />
+                            <span className='text-sm font-bold'>Blogs</span>
                         </Link>
-                        <span className='sm:block hidden'>0</span>
                     </li>
-                    <li className='flex items-center relative group w-10'>
+                    <li className='sm:flex items-center relative group w-10'>
                         {
                             !loading && (currentUser ? (
-                                <img className='rounded-full h-10 w-10' src={currentUser.photoURL} alt={currentUser.displayName} />
-                                // <FaUserAlt size={20} color={responsiveNav ? '#fff' : '#222'} />
+                                <img className='rounded-full h-10 w-10 sm:block hidden' src={currentUser.photoURL} alt={currentUser.displayName} />
                             ) : (
                                 <Link className='p-2 hidden sm:block' to='/login'>
                                     <FaUserPlus size={22} color={responsiveNav ? '#fff' : '#222'} />
@@ -59,7 +56,7 @@ const Menubar = () => {
                             {
                                 currentUser ? (
                                     <>
-                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10'>
+                                        <li className='px-2 mb-3 sm:mb-0 sm:p-2 text-sm hover:bg-primary/10 hover:text-secondary'>
                                             <div>
                                                 {currentUser?.displayName}
                                             </div>
@@ -68,19 +65,16 @@ const Menubar = () => {
                                             </div>
                                         </li>
 
-                                        <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0' />
+                                        <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0 ' />
 
-                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full'>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full hover:text-secondary'>
                                             <Link className='px-2 block sm:p-2' to='/dashboard'>Dashboard</Link>
                                         </li>
-                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full'>
-                                            <Link className='px-2 block sm:p-2'>Become an admin</Link>
-                                        </li>
 
-                                        <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0' />
+                                        <hr className='hidden sm:block my-1 h-[1px] bg-primary/60 border-0 ' />
 
-                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full'>
-                                            <button className='px-2 block sm:p-2' onClick={() => logoutUser()} type='button block'>Logout</button>
+                                        <li className='mb-3 sm:mb-0 text-sm hover:bg-primary/10 w-full hover:text-secondary'>
+                                            <button className='px-2 block sm:p-2 w-full' onClick={() => logoutUser()} type='button block'>Logout</button>
                                         </li>
                                     </>
                                 ) : (

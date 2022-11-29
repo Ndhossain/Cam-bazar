@@ -1,7 +1,7 @@
 import React from 'react';
 
-const BookingsRow = ({booking, handleCancelBooking}) => {
-    const {productName, productPrice, meetAdress, date, status, productId } = booking;
+const CustomerBookingRow = ({booking, handleBookingApproval}) => {
+    const {productName, buyerEmail , meetAdress, date, buyerPhoneNo, status, productId, buyerUid } = booking;
     // date
     const day = new Date(date).getDate();
     const month = new Date(date).getMonth();
@@ -15,22 +15,22 @@ const BookingsRow = ({booking, handleCancelBooking}) => {
                 {productName}
             </th>
             <td className="py-4 px-6">
-                {productPrice} BDT
+                <span>{buyerEmail}</span>
+                <br />
+                <span>{buyerPhoneNo}</span>
             </td>
             <td className="py-4 px-6">
                 {meetAdress}
             </td>
             <td className="py-4 px-6">
-                <span>{status}</span>
-                <br />
-                <span>{`${day}-${month}-${year} at ${time}:${minute < 10 ? `0${minute}`: minute}`}</span>
+                {`${day}-${month}-${year} at ${time}:${minute < 10 ? `0${minute}`: minute}`}
             </td>
             <td className="py-4 px-6">
                 {
                     status === 'Requested' ? 
-                        <button onClick={() => handleCancelBooking(productId)} className="text-secondary font-bold hover:underline">Cancel</button> : 
+                        <button onClick={() => handleBookingApproval(productId, buyerUid)} className="text-secondary font-bold hover:underline">Approve</button> : 
                     status === 'Accepted' ? 
-                        <button className="text-secondary font-bold hover:underline">Pay</button> : 
+                        <span>Approved</span> : 
                     status === 'Paid' ? 
                         <span>Successful</span> : 
                             <span>Canceled</span>
@@ -40,4 +40,4 @@ const BookingsRow = ({booking, handleCancelBooking}) => {
     );
 };
 
-export default BookingsRow;
+export default CustomerBookingRow;

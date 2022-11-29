@@ -30,7 +30,7 @@ const MyProductContainer = ({product, setModalStatus, setDeleteId, produtctAdver
             </td>
             <td className="py-4 px-6">
                 {
-                    advertise ==='false' ? (
+                    status === 'unsold' && (advertise ==='false' ? (
                         <button
                             onClick={() => produtctAdvertisement(_id, { advertise: 'true' })}
                             className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'
@@ -40,11 +40,15 @@ const MyProductContainer = ({product, setModalStatus, setDeleteId, produtctAdver
                             onClick={() => produtctAdvertisement(_id, { advertise: 'false' })}
                             className='px-2 py-1 border border-primary text-primary hover:bg-primary hover:text-white font-bold'
                         >Don't Ad</button>
-                    )
+                    ))
                 }
             </td>
             <td className="py-4 px-6">
-                <Link to={`/dashboard/editproduct/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                {
+                    status === 'unsold' && (
+                        <Link to={`/dashboard/editproduct/${_id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                    )
+                }
             </td>
         </tr>
     );

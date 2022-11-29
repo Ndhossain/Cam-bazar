@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Footer from '../Components/Common/Footer/Footer';
 import Menubar from '../Components/Common/Menubar/Menubar';
 
 const PublicLayout = () => {
@@ -7,6 +8,7 @@ const PublicLayout = () => {
         <>
             <Menubar />
             <Outlet />
+            <Footer />
         </>
     );
 };

@@ -20,7 +20,7 @@ const MyProducts = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/products?uid=${currentUser.uid}`
+                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/products/${currentUser.uid}`
                 })
                 return res;
             } catch (err) {
