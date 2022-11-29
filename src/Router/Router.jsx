@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminRoute from "../Components/Pages/Private/Admin/AdminRoute";
 import Buyers from "../Components/Pages/Private/Admin/Buyers/Buyers";
 import Sellers from "../Components/Pages/Private/Admin/Sellers/Sellers";
-import MyBookings from "../Components/Pages/Private/Buyer/MyBookings";
+import MyBookings from "../Components/Pages/Private/Buyer/MyBookings/MyBookings";
 import ProductDetails from "../Components/Pages/Private/Buyer/ProductDetails/ProductDetails";
 import Shop from "../Components/Pages/Private/Buyer/Shop/Shop";
 import Myprofile from "../Components/Pages/Private/MyProfile/Myprofile";
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
                 )
             },
             {
-                path: '/dashboard/mycustomers',
+                path: '/dashboard/customerbookings',
                 element: (
                     <SellerRoute>
                         <MyCustomers />
