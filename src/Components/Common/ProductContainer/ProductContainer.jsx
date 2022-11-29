@@ -13,7 +13,7 @@ const ProductContainer = ({ product }) => {
     // date
 
     return (
-        <div className="flex flex-col items-center bg-white border rounded-lg shadow-md sm:flex-row w-full">
+        <div className="flex flex-col items-center bg-white border rounded-lg shadow-md sm:flex-row w-full shrink-0">
             <img className="object-cover h-full w-[200px] p-2 rounded-t-lg md:rounded-none md:rounded-l-lg" src={productImage} alt={productName} />
             <div className="flex flex-col justify-between p-4 leading-normal">
                 <Link className='hover:text-secondary' to={`/product/${_id}`}>

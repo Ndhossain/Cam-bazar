@@ -3,6 +3,7 @@ import AdminRoute from "../Components/Pages/Private/Admin/AdminRoute";
 import Buyers from "../Components/Pages/Private/Admin/Buyers/Buyers";
 import Sellers from "../Components/Pages/Private/Admin/Sellers/Sellers";
 import MyBookings from "../Components/Pages/Private/Buyer/MyBookings";
+import ProductDetails from "../Components/Pages/Private/Buyer/ProductDetails/ProductDetails";
 import Shop from "../Components/Pages/Private/Buyer/Shop/Shop";
 import Myprofile from "../Components/Pages/Private/MyProfile/Myprofile";
 import PrivateRoute from "../Components/Pages/Private/PrivateRoute";
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
+                path: '/login',
+                element: <Login />,
+            },
+            {
+                path: '/register',
+                element: <Register />,
+            },
+            {
                 path: '/shop/:id',
                 element: (
                     <PrivateRoute>
@@ -34,12 +43,12 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: '/login',
-                element: <Login />,
-            },
-            {
-                path: '/register',
-                element: <Register />,
+                path: '/product/:id',
+                element: (
+                    <PrivateRoute>
+                        <ProductDetails />
+                    </PrivateRoute>
+                ),
             },
         ],
     },

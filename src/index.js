@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Toaster } from 'react-hot-toast';
 import AuthProvider from './Contexts/AuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root'));
