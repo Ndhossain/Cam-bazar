@@ -92,7 +92,7 @@ const MyBookings = () => {
                     <tbody>
                         {
                             bookings?.data?.length > 0 ? 
-                                bookings?.data?.map((booking) => <BookingsRow key={booking._id} booking={booking} handleCancelBooking={handleCancelBooking} />) 
+                                bookings?.data?.map((booking) => <BookingsRow key={booking._id} booking={booking} handleCancelBooking={handleCancelBooking} uid={currentUser.uid} />) 
                                 : 
                                 <tr className='text-center text-3xl font-bold'><th>Haven't booked anything yet</th></tr>
                         }

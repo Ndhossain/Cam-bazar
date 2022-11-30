@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const BookingsRow = ({booking, handleCancelBooking}) => {
-    const {productName, productPrice, meetAdress, date, status, productId } = booking;
+const BookingsRow = ({booking, handleCancelBooking, uid}) => {
+    const {productName, productPrice, meetAdress, date, status, productId, _id } = booking;
     // date
     const day = new Date(date).getDate();
     const month = new Date(date).getMonth();
@@ -30,7 +31,7 @@ const BookingsRow = ({booking, handleCancelBooking}) => {
                     status === 'Requested' ? 
                         <button onClick={() => handleCancelBooking(productId)} className="text-secondary font-bold hover:underline">Cancel</button> : 
                     status === 'Accepted' ? 
-                        <button className="text-secondary font-bold hover:underline">Pay</button> : 
+                        <Link to={`/payment/${_id}/${uid}`} className="text-secondary font-bold hover:underline">Pay</Link> : 
                     status === 'Paid' ? 
                         <span>Successful</span> : 
                             <span>Canceled</span>

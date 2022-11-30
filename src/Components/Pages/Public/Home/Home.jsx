@@ -2,6 +2,7 @@ import React from 'react';
 import AdvertiseItems from './asvertised-Items/AdvertiseItems';
 import CategorySection from './categoies-section/CategorySection';
 import Header from './Header';
+import ReviewForm from './ReviewForm';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
                 <CategorySection />
                 <AdvertiseItems />
             </main>
+            <ReviewForm />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import AdminRoute from "../Components/Pages/Private/Admin/AdminRoute";
 import Buyers from "../Components/Pages/Private/Admin/Buyers/Buyers";
 import Sellers from "../Components/Pages/Private/Admin/Sellers/Sellers";
 import MyBookings from "../Components/Pages/Private/Buyer/MyBookings/MyBookings";
+import Payment from "../Components/Pages/Private/Buyer/Payment/Payment";
 import ProductDetails from "../Components/Pages/Private/Buyer/ProductDetails/ProductDetails";
 import Shop from "../Components/Pages/Private/Buyer/Shop/Shop";
 import Myprofile from "../Components/Pages/Private/MyProfile/Myprofile";
@@ -11,6 +12,7 @@ import AddProducts from "../Components/Pages/Private/Seller/AddProducts/AddProdu
 import MyCustomers from "../Components/Pages/Private/Seller/MyCustomers/MyCustomers";
 import MyProducts from "../Components/Pages/Private/Seller/MyProducts/MyProducts";
 import SellerRoute from "../Components/Pages/Private/Seller/SellerRoute";
+import CategoryPage from "../Components/Pages/Public/CategoryPage/CategoryPage";
 import Home from "../Components/Pages/Public/Home/Home";
 import Login from "../Components/Pages/Public/Login/Login";
 import Register from "../Components/Pages/Public/Register/Register";
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />,
+            },
+            {
+                path: '/shop',
+                element: <CategoryPage />,
             },
             {
                 path: '/shop/:id',
@@ -109,6 +115,18 @@ const router = createBrowserRouter([
                 ),
             }
         ]
+    },
+    {
+        path: '/payment/:id/:uid',
+        loader: ({params}) => {
+            const res = fetch(`${process.env.REACT_APP_DEV_SERVER_URL}/bookings/${params.id}/${params.uid}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
+                },
+            })
+            return res;
+        },
+        element: <Payment />
     }
 ]);
 
