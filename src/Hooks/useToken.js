@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react"
-import useAuth from "./useAuth";
+import { useEffect, useState } from "react";
 import { toast } from 'react-hot-toast';
+import useAuth from "./useAuth";
 
 const useToken = (uid) => {
     const [token, setToken] = useState('');
@@ -12,7 +11,7 @@ const useToken = (uid) => {
             axios({
                 method: 'POST',
                 data: { uid },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/jwt`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/jwt`
             }).then(res => {
                 if (res.data.token) {
                     localStorage.setItem('cam-bazar-token', res.data.token);

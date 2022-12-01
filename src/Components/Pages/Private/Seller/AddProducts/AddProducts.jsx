@@ -20,7 +20,7 @@ const AddProducts = () => {
             try {
                 const res = await axios({
                     method: 'get',
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/categories`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/categories`
                 })
                 return res;
             } catch (err) {
@@ -59,7 +59,7 @@ const AddProducts = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/products?uid=${currentUser.uid}`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/products?uid=${currentUser.uid}`
             })
             toast.success('Successfully addeded');
             navigate('/dashboard/myproducts')

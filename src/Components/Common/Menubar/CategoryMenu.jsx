@@ -7,7 +7,7 @@ const CategoryMenu = () => {
     useEffect(() => {
         axios({
             method: 'GET',
-            url: `${process.env.REACT_APP_DEV_SERVER_URL}/categories`,
+            url: `${process.env.REACT_APP_PROD_SERVER_URL}/categories`,
         }).then(res => {
             setCategories(res.data)
         }).catch(err => {

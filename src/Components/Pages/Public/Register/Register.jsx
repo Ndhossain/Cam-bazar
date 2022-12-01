@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import useAuth from '../../../../Hooks/useAuth';
-import useToken from '../../../../Hooks/useToken';
-import SocialLogin from '../../../Common/SocialLogin/SocialLogin';
-import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import PulseLoader from "react-spinners/PulseLoader";
+import useAuth from '../../../../Hooks/useAuth';
+import useToken from '../../../../Hooks/useToken';
+import SocialLogin from '../../../Common/SocialLogin/SocialLogin';
 
 const Register = () => {
     const [userImage, setUserImage] = useState(null);
@@ -52,7 +51,7 @@ const Register = () => {
                     uid: userRegisterRes.user.uid,
                     image: userRegisterRes.user.photoURL,
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/user`
             });
             setCurrentUserUid(userRegisterRes.user.uid);
         } catch (err) {

@@ -17,7 +17,7 @@ const MyCustomers = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/seller-bookings/${currentUser?.uid}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/seller-bookings/${currentUser?.uid}`
                 })
                 return res;
             } catch (err) {
@@ -35,7 +35,7 @@ const MyCustomers = () => {
         try {
             const res = await axios({
                 method: 'PUT',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/booking/${productId}/${buyerUid}?uid=${currentUser?.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/booking/${productId}/${buyerUid}?uid=${currentUser?.uid}`,
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },

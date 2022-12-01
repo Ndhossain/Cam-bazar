@@ -17,7 +17,7 @@ const MyBookings = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/buyer-bookings/${currentUser?.uid}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/buyer-bookings/${currentUser?.uid}`
                 })
                 return res;
             } catch (err) {
@@ -48,7 +48,7 @@ const MyBookings = () => {
         try {
             await axios({
                 method: 'DELETE',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/bookings/${id}/${currentUser?.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/bookings/${id}/${currentUser?.uid}`,
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 }

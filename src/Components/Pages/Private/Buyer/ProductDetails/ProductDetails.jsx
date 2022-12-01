@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ImageGallery from 'react-image-gallery';
 import { useNavigate, useParams } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useAuth from '../../../../../Hooks/useAuth';
-import ImageGallery from 'react-image-gallery';
-import './productdetails.css'
 import BookingModal from './BookingModal';
+import './productdetails.css';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -24,7 +24,7 @@ const ProductDetails = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/productdetails/${id}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/productdetails/${id}`
                 })
                 return res;
             } catch (err) {
@@ -46,7 +46,7 @@ const ProductDetails = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/isBooked/${id}/${currentUser?.uid}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/isBooked/${id}/${currentUser?.uid}`
                 })
                 return res;
             } catch (err) {
@@ -68,7 +68,7 @@ const ProductDetails = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/isWishlisted/${id}/${currentUser?.uid}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/isWishlisted/${id}/${currentUser?.uid}`
                 })
                 return res;
             } catch (err) {
@@ -81,8 +81,6 @@ const ProductDetails = () => {
             }
         }
     })
-
-    console.log(productInfo)
 
     if (isLoading || isBookingLoading || isWishlistLoading) {
         return (
@@ -98,7 +96,14 @@ const ProductDetails = () => {
         );
     }
 
-    if(!productInfo || !isBooked || !isWishListed) return<></>;
+    if(!isBooked || !isWishListed) return <></>;
+    if(!productInfo.data) {
+        return (
+            <div className='mt-10'>
+                <h1 className='text-3xl font-bold text-primary text-center'>Sorry! This Product has been sold or might be unavailable any more.</h1>
+            </div>
+        )
+    }
 
     const { productImage, productName, _id, usage, sellingPrice, sellerName, sellerAdress, newPrice, date, productModel, productBrand, phoneNo, description, condition, uid, sellerEmail } = productInfo?.data;
     const images = productImage?.map(img => {
@@ -118,7 +123,7 @@ const ProductDetails = () => {
             setLoading(true);
             await axios({
                 method: 'POST',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/bookings?uid=${currentUser.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/bookings?uid=${currentUser.uid}`,
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
@@ -150,7 +155,7 @@ const ProductDetails = () => {
         try {
             await axios({
                 method: 'POST',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/wishlist?uid=${currentUser.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/wishlist?uid=${currentUser.uid}`,
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
@@ -184,7 +189,7 @@ const ProductDetails = () => {
         try {
             await axios({
                 method: 'DELETE',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/bookings/${id}/${currentUser?.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/bookings/${id}/${currentUser?.uid}`,
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 }
@@ -206,7 +211,7 @@ const ProductDetails = () => {
         try {
             await axios({
                 method: 'DELETE',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/wishlist/${id}/${currentUser?.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/wishlist/${id}/${currentUser?.uid}`,
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 }
@@ -223,12 +228,13 @@ const ProductDetails = () => {
             }
         }
     }
+    console.log(productInfo)
 
     return (
         <main className='max-w-[1480px] mx-auto px-3'>
             <div className='md:flex items-center'>
                 <div className='md:basis-1/2 p-5'>
-                    <ImageGallery showPlayButton={false} items={images} />
+                    <ImageGallery showPlayButton={false} items={images || []} />
                 </div>
                 <div className='md:basis-1/2 p-5'>
                     <h1 className='text-xl text-secondary font-bold'>{productName}</h1>

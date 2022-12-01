@@ -7,7 +7,8 @@ import MyBookings from "../Components/Pages/Private/Buyer/MyBookings/MyBookings"
 import Payment from "../Components/Pages/Private/Buyer/Payment/Payment";
 import ProductDetails from "../Components/Pages/Private/Buyer/ProductDetails/ProductDetails";
 import Shop from "../Components/Pages/Private/Buyer/Shop/Shop";
-import Myprofile from "../Components/Pages/Private/MyProfile/Myprofile";
+import WishList from "../Components/Pages/Private/Buyer/WishList/WishList";
+// import Myprofile from "../Components/Pages/Private/MyProfile/Myprofile";
 import PrivateRoute from "../Components/Pages/Private/PrivateRoute";
 import AddProducts from "../Components/Pages/Private/Seller/AddProducts/AddProducts";
 import MyCustomers from "../Components/Pages/Private/Seller/MyCustomers/MyCustomers";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
                 element: <CategoryPage />,
             },
             {
+                path: '/wishlist',
+                element: <WishList />,
+            },
+            {
                 path: '/shop/:id',
                 element: (
                     <PrivateRoute>
@@ -69,16 +74,16 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Myprofile />
+                element: <BookingHistory />
             },
             {
                 path: '/dashboard/mybookings',
                 element: <MyBookings />
             },
-            {
-                path: '/dashboard/booking-history',
-                element: <BookingHistory />
-            },
+            // {
+            //     path: '/dashboard/booking-history',
+            //     element: 
+            // },
             {
                 path: '/dashboard/myproducts',
                 element: (
@@ -124,14 +129,18 @@ const router = createBrowserRouter([
     {
         path: '/payment/:id/:uid',
         loader: ({params}) => {
-            const res = fetch(`${process.env.REACT_APP_DEV_SERVER_URL}/bookings/${params.id}/${params.uid}`, {
+            const res = fetch(`${process.env.REACT_APP_PROD_SERVER_URL}/bookings/${params.id}/${params.uid}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
             })
             return res;
         },
-        element: <Payment />
+        element: (
+            <PrivateRoute>
+                <Payment />
+            </PrivateRoute>
+        )
     }
 ]);
 

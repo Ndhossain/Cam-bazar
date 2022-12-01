@@ -18,7 +18,7 @@ const AdvertiseItems = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/products?advertise=${true}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/products?advertise=${true}`
                 })
                 return res;
             } catch (err) {

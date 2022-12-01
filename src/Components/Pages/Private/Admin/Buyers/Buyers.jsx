@@ -20,7 +20,7 @@ const Buyers = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/user/buyer?uid=${currentUser.uid}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/user/buyer?uid=${currentUser.uid}`
                 })
                 return res;
             } catch (err) {
@@ -42,7 +42,7 @@ const Buyers = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user/${deleteUid}?uid=${currentUser.uid}`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/user/${deleteUid}?uid=${currentUser.uid}`
             })
             refetch();
             setModalStatus(false);

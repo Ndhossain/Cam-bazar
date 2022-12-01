@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js'
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
-import PulseLoader from 'react-spinners/PulseLoader';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 const Checkout = ({booking}) => {
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(true);
+    const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
     const stripe = useStripe();
     const  elements = useElements();
@@ -14,7 +14,7 @@ const Checkout = ({booking}) => {
 
     useEffect(() => {
       // Create PaymentIntent as soon as the page loads
-      fetch(`${process.env.REACT_APP_DEV_SERVER_URL}/createpaymentintent`, {
+      fetch(`${process.env.REACT_APP_PROD_SERVER_URL}/createpaymentintent`, {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const Checkout = ({booking}) => {
                     productId: booking.productId,
                     email: booking.buyerEmail,
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/payments`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/payments`
             })
             console.log(res);
             setLoading(false);

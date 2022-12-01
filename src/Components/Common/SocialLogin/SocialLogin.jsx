@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { FcGoogle } from 'react-icons/fc'
+import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import useToken from '../../../Hooks/useToken';
@@ -34,7 +34,7 @@ const SocialLogin = ({ setError }) => {
                     uid: res.user.uid,
                     image: res.user.photoURL,
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/user`
             });
             setCurrentUserUid(res.user.uid);
         } catch (err) {

@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react"
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAuth from "./useAuth";
 
@@ -17,7 +16,7 @@ const useUserRole = (uid) => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user/role/${uid}`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/user/role/${uid}`
             }).then((res) => {
                 setIsAdmin(res.data.isAdmin);
                 setIsSeller(res.data.isSeller);

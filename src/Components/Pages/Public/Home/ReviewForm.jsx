@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewBanner from '../../../../assets/images/review.jpg'
+import ReviewBanner from '../../../../assets/images/review.jpg';
 
 const ReviewForm = () => {
     return (
@@ -21,7 +21,7 @@ const ReviewForm = () => {
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="py-2.5 px-5 w-full text-sm font-bold bg-white border border-white hover:bg-transparent text-primary hover:text-white">Alternative</button>
+                    <button type="submit" className="py-2.5 px-5 w-full text-sm font-bold bg-white border border-white hover:bg-transparent text-primary hover:text-white">Alternative</button>
                 </div>
             </form>
         </div>

@@ -20,7 +20,7 @@ const MyProducts = () => {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                     },
-                    url: `${process.env.REACT_APP_DEV_SERVER_URL}/products/${currentUser.uid}`
+                    url: `${process.env.REACT_APP_PROD_SERVER_URL}/products/${currentUser.uid}`
                 })
                 return res;
             } catch (err) {
@@ -42,7 +42,7 @@ const MyProducts = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/products/${deleteId}?uid=${currentUser.uid}`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/products/${deleteId}?uid=${currentUser.uid}`
             })
             refetch();
             setModalStatus(false);
@@ -66,7 +66,7 @@ const MyProducts = () => {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
                 },
                 data: data,
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/products/${id}?uid=${currentUser.uid}`
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/products/${id}?uid=${currentUser.uid}`
             })
             refetch();
             toast.success(data.advertise ? 'Advertising your product' : 'Removed From advertisement');
