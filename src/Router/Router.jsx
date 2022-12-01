@@ -15,6 +15,7 @@ import MyCustomers from "../Components/Pages/Private/Seller/MyCustomers/MyCustom
 import MyProducts from "../Components/Pages/Private/Seller/MyProducts/MyProducts";
 import SellerRoute from "../Components/Pages/Private/Seller/SellerRoute";
 import CategoryPage from "../Components/Pages/Public/CategoryPage/CategoryPage";
+import Error from "../Components/Pages/Public/Error/Error";
 import Home from "../Components/Pages/Public/Home/Home";
 import Login from "../Components/Pages/Public/Login/Login";
 import Register from "../Components/Pages/Public/Register/Register";
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <PublicLayout />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/',
@@ -70,6 +72,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
+        errorElement: <Error />,
         element: (
             <PrivateRoute>
                 <DashboardLayout />
@@ -132,6 +135,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/payment/:id/:uid',
+        errorElement: <Error />,
         loader: ({params}) => {
             const res = fetch(`${process.env.REACT_APP_PROD_SERVER_URL}/bookings/${params.id}/${params.uid}`, {
                 headers: {
