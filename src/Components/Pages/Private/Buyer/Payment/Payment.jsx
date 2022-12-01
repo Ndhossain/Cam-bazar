@@ -11,7 +11,7 @@ const Payment = () => {
     console.log(data);
     return (
         <div className='h-screen w-screen flex justify-center items-center flex-col'>
-            <div className='p-5 w-1/2 shadow-2xl border'>
+            <div className='p-5 w-full sm:w-3/4 md:w-1/2 shadow-2xl border'>
                 <h1 className='text-2xl font-bold text-primary mb-5'>Payment For- {data.productName}</h1>
                 <p className='mb-5'>Payment Price: {data.productPrice} BDT</p>
                 <Elements stripe={stripePromise}>
