@@ -29,12 +29,8 @@ const BookingsRow = ({booking, handleCancelBooking, uid}) => {
             <td className="py-4 px-6">
                 {
                     status === 'Requested' ? 
-                        <button onClick={() => handleCancelBooking(productId)} className="text-secondary font-bold hover:underline">Cancel</button> : 
-                    status === 'Accepted' ? 
-                        <Link to={`/payment/${_id}/${uid}`} className="text-secondary font-bold hover:underline">Pay</Link> : 
-                    status === 'Paid' ? 
-                        <span>Successful</span> : 
-                            <span>Canceled</span>
+                        <button onClick={() => handleCancelBooking(productId)} className="text-secondary font-bold hover:underline">Cancel</button> :  
+                        <Link to={`/payment/${_id}/${uid}`} className="text-secondary font-bold hover:underline">Pay</Link> 
                 }
             </td>
         </tr>

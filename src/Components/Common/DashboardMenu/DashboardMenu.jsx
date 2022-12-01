@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-import { FaHandHolding, FaUserAlt, FaUserCog, FaUserFriends } from 'react-icons/fa';
+import { FaHandHolding, FaHistory, FaUserAlt, FaUserCog, FaUserFriends } from 'react-icons/fa';
 import { MdAddCircle, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
@@ -20,10 +20,10 @@ const DashboardMenu = () => {
                         </Link>
                     </h1>
                 <ul className="space-y-2">
-                    <li>
-                        <Link to="/dashboard" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <FaUserAlt color='#222' size={22} />
-                        <span className="font-bold text-primary ml-3">Profile</span>
+                <li>
+                        <Link to="/dashboard/booking-history" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <FaHistory color='#222' size={22} />
+                        <span className="font-bold text-primary ml-3">History</span>
                         </Link>
                     </li>
                     <li>
