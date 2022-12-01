@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useAuth from '../../../../Hooks/useAuth';
 import useUserRole from '../../../../Hooks/useUserRole';
@@ -7,6 +7,7 @@ import useUserRole from '../../../../Hooks/useUserRole';
 const AdminRoute = ({children}) => {
     const {currentUser} = useAuth();
     const {isLoading, isAdmin} = useUserRole(currentUser.uid);
+    const location = useLocation();
 
     if (isLoading) {
         return (
@@ -23,7 +24,7 @@ const AdminRoute = ({children}) => {
     }
 
     if (!isAdmin) {
-        return <Navigate to='/login' />;
+        return <Navigate to='/login' state={{from: location}} replace />;;
     }
 
     return children;

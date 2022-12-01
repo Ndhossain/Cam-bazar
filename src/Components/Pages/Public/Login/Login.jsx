@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useAuth from '../../../../Hooks/useAuth';
 import useToken from '../../../../Hooks/useToken';
@@ -14,13 +14,16 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const token = useToken(currentUserUid);
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
     
     useEffect(() => {
         if (token) {
             toast.success('Successfully logged in');
-            navigate('/');
+            navigate(from, {replace: true});
         }
-    }, [navigate, token])
+    }, [navigate, token, from])
 
     const onsubmit = async (data) => {
         try {
@@ -73,7 +76,7 @@ const Login = () => {
                     >Password</label>
                     {errors.password && <p className='text-danger text-sm' role="alert">{errors.password?.message}</p>}
                 </div>
-                <p className='text-sm mb-5'>Don't have an account? <Link className='underline' to='/register'>Register</Link> now.</p>
+                <p className='text-sm mb-5'>Don't have an account? <Link className='underline' to='/register' state={{from: from}}>Register</Link> now.</p>
                 <div>
                     <button
                         type="submit" 
@@ -99,7 +102,7 @@ const Login = () => {
                         Or
                     </span>
                 </div>
-                <SocialLogin setError={setError} />
+                <SocialLogin from={from} setError={setError} />
             </form>
         </main>
     );

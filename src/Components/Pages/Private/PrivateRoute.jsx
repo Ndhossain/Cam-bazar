@@ -1,10 +1,11 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useAuth from '../../../Hooks/useAuth';
 
 const PrivateRoute = ({children}) => {
     const {currentUser, loading} = useAuth();
+    const location = useLocation();
 
     if (loading) {
         return (
@@ -21,7 +22,7 @@ const PrivateRoute = ({children}) => {
     }
 
     if (!currentUser) {
-        return <Navigate to='/login' />;
+        return <Navigate to='/login' state={{from: location}} replace />;
     }
 
     return children;

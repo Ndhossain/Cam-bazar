@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 import useToken from '../../../Hooks/useToken';
 
-const SocialLogin = ({ setError }) => {
+const SocialLogin = ({ setError, from }) => {
     const googleProvider = new GoogleAuthProvider();
     const {providerLogin, loading, setLoading} = useAuth();
     const [currentUserUid, setCurrentUserUid] = useState('');
@@ -17,9 +17,9 @@ const SocialLogin = ({ setError }) => {
     useEffect(() => {
         if (token) {
             toast.success('Successfully logged in');
-            navigate('/');
+            navigate(from, {replace: true});
         }
-    }, [navigate, token])
+    }, [from, navigate, token])
 
     const googleLogin = async () => {
         try {
@@ -46,7 +46,8 @@ const SocialLogin = ({ setError }) => {
 
     return (
         <div className='flex justify-center gap-3'>
-            <button 
+            <button
+                type='button'
                 onClick={() => googleLogin()}
                 disabled={loading}
             >

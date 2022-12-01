@@ -7,12 +7,12 @@ import useAuth from '../../../Hooks/useAuth';
 import useUserRole from '../../../Hooks/useUserRole';
 
 
-const DashboardMenu = () => {
+const DashboardMenu = ({responsiveNav}) => {
     const { currentUser } = useAuth();
     const { isAdmin, isLoading, isSeller } = useUserRole(currentUser.uid);
 
     return (
-        <aside className="w-max p-2 bg-primary h-screen sticky top-0" aria-label="Sidebar">
+        <aside className={`w-max p-2 bg-primary h-screen absolute md:sticky top-0 z-30 md:translate-x-0 translate-x-[${responsiveNav ? '0' : '300'}%] duration-300`} aria-label="Sidebar">
             <div style={{height: `calc(100vh - 16px)`}} className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 w-max">
                     <h1 className='text-3xl text-primary font-black mb-5'>
                         <Link to='/'>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import PulseLoader from "react-spinners/PulseLoader";
 import useAuth from '../../../../Hooks/useAuth';
 import useToken from '../../../../Hooks/useToken';
@@ -18,13 +18,16 @@ const Register = () => {
     const {registerUser, loading, setLoading} = useAuth();
     const navigate = useNavigate();
     const token = useToken(currentUserUid);
+    const location = useLocation();
+
+    const from = location.state?.from || '/';
     
     useEffect(() => {
         if (token) {
             toast.success('Successfully registered');
-            navigate('/');
+            navigate(from, {replace: true});
         }
-    }, [navigate, token])
+    }, [navigate, token, from])
 
 
     const onsubmit = async (data) => {
@@ -181,7 +184,7 @@ const Register = () => {
                         Or
                     </span>
                 </div>
-                <SocialLogin setError={setError} />
+                <SocialLogin setError={setError} from={from} />
             </form>
         </main>
     );

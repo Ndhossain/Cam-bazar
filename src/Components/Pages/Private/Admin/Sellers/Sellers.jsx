@@ -5,14 +5,14 @@ import toast from 'react-hot-toast';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useAuth from '../../../../../Hooks/useAuth';
 import DeleteConfirmationBox from '../../../../Common/DeleteConfirmationBox/DeleteConfirmationBox';
-import BuyersRow from '../Buyers/BuyersRow';
+import SellersRow from './SellersRow';
 
 const Sellers = () => {
     const [modalStatus, setModalStatus] = useState(false);
     const [deleteUid, setDeleteUid] = useState('')
     const {currentUser, logoutUser} = useAuth();
     const {data: users, isLoading, refetch} = useQuery({
-        queryKey: ['user', 'buyer', currentUser.uid],
+        queryKey: ['user', 'seller', currentUser.uid],
         queryFn: async () => {
             try {
                 const res = await axios({
@@ -57,6 +57,30 @@ const Sellers = () => {
             }
         }
     }
+
+    const handleVerify = async (id) => {
+        try {
+            await axios({
+                method: 'PUT',
+                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user/verify/${id}?uid=${currentUser?.uid}`,
+                data: {isVerified: 'Verified'},
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`
+                },
+            })
+            refetch();
+            toast.success('Verification Confirmed')
+        } catch (err) {
+            console.log(err)
+            if (err.response.status === 403 || err.response.status === 401) {
+                logoutUser();
+                toast.error(err.response.data.message);
+            } else {
+                toast.error('Something Went Wrong')
+            }
+        }
+    }
+
     return (
         <main className='w-full'>
             {
@@ -91,7 +115,7 @@ const Sellers = () => {
                         <tbody>
                             {
                                 users?.data?.map(
-                                    user => <BuyersRow key={user._id} user={user} setModalStatus={setModalStatus} setDeleteUid={setDeleteUid} />
+                                    user => <SellersRow handleVerify={handleVerify} key={user._id} user={user} setModalStatus={setModalStatus} setDeleteUid={setDeleteUid} />
                                 )
                             }
                         </tbody>
