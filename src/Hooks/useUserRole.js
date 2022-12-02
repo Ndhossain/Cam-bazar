@@ -11,7 +11,8 @@ const useUserRole = (uid) => {
     const {logoutUser, currentUser} = useAuth();
     
     useEffect(() => {
-        if (uid) {
+        if (uid && currentUser?.uid) {
+            console.log(uid);
             axios({
                 method: 'GET',
                 headers: {

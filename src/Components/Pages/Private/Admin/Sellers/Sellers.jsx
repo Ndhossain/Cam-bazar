@@ -62,7 +62,7 @@ const Sellers = () => {
         try {
             await axios({
                 method: 'PUT',
-                url: `${process.env.REACT_APP_DEV_SERVER_URL}/user/verify/${id}?uid=${currentUser?.uid}`,
+                url: `${process.env.REACT_APP_PROD_SERVER_URL}/user/verify/${id}?uid=${currentUser?.uid}`,
                 data: {isVerified: 'Verified'},
                 headers: {
                     authorization: `bearer ${localStorage.getItem('cam-bazar-token')}`

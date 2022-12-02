@@ -5,7 +5,7 @@ const ReviewForm = () => {
     return (
         <div className='relative'>
             <div>
-                <img className='min-h-[450px]' src={ReviewBanner} alt="Review Banner" />
+                <img className='min-h-[450px] w-full' src={ReviewBanner} alt="Review Banner" />
             </div>
             <form className='absolute bottom-1/2 translate-x-1/2 translate-y-1/2 right-1/2 p-5 w-[95%] sm:w-3/4 md:w-1/2 lg:w-1/4 bg-white/20 backdrop-blur-sm'>
                 <h1 className='text-white text-center font-bold text-xl mb-6'>Give us a review</h1>
