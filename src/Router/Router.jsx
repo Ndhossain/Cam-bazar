@@ -14,6 +14,7 @@ import AddProducts from "../Components/Pages/Private/Seller/AddProducts/AddProdu
 import MyCustomers from "../Components/Pages/Private/Seller/MyCustomers/MyCustomers";
 import MyProducts from "../Components/Pages/Private/Seller/MyProducts/MyProducts";
 import SellerRoute from "../Components/Pages/Private/Seller/SellerRoute";
+import Blog from "../Components/Pages/Public/Blog/Blog";
 import CategoryPage from "../Components/Pages/Public/CategoryPage/CategoryPage";
 import Error from "../Components/Pages/Public/Error/Error";
 import Home from "../Components/Pages/Public/Home/Home";
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />,
+            },
+            {
+                path: '/blog',
+                element: <Blog />,
             },
             {
                 path: '/shop',

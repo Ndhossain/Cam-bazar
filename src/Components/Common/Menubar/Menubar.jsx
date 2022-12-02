@@ -37,7 +37,7 @@ const Menubar = () => {
                         </Link>
                     </li>
                     <li className='flex items-center mt-14 sm:mt-0'>
-                        <Link className='px-2 sm:p-2 flex items-center gap-2 hover:text-secondary' to='/'>
+                        <Link className='px-2 sm:p-2 flex items-center gap-2 hover:text-secondary' to='/blog'>
                             <FaBlogger className='sm:block hidden' size={18} />
                             <span className='text-sm font-bold'>Blogs</span>
                         </Link>

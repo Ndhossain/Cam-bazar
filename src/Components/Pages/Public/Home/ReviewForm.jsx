@@ -21,7 +21,7 @@ const ReviewForm = () => {
                     </div>
                 </div>
                 <div>
-                    <button type="submit" className="py-2.5 px-5 w-full text-sm font-bold bg-white border border-white hover:bg-transparent text-primary hover:text-white">Alternative</button>
+                    <button type="submit" className="py-2.5 px-5 w-full text-sm font-bold bg-white border border-white hover:bg-transparent text-primary hover:text-white">Add Review</button>
                 </div>
             </form>
         </div>
